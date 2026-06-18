@@ -19,4 +19,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 COPY --from=builder /usr/local /usr/local
 
 WORKDIR /work
+
+# create a non-root user and switch to it
+RUN useradd -m galaxy && chown -R galaxy:galaxy /work
+USER galaxy
+
 CMD [""]
