@@ -16,6 +16,10 @@ FROM python:${PYTHON_VERSION}-slim-trixie AS runtime
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libvips42t64 \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY --from=builder /usr/local /usr/local
 
 WORKDIR /work
